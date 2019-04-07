@@ -1,6 +1,8 @@
 package jlabel;
 
 import converte.GrayScale;
+import converte.TransformacaoGeometrica;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
@@ -8,104 +10,130 @@ public class NewJFrameImg extends javax.swing.JFrame {
 
     public NewJFrameImg() {
         initComponents();
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        labelImgOriginal = new javax.swing.JLabel();
+        botaoConverter = new javax.swing.JButton();
+        txtImagemOriginal = new javax.swing.JLabel();
+        txtImagemEditada = new javax.swing.JLabel();
+        labelMediana = new javax.swing.JLabel();
+        labeMedSuperior = new javax.swing.JLabel();
+        labelMedInferior = new javax.swing.JLabel();
+        labelImgEditada = new javax.swing.JLabel();
+        labelVariancia = new javax.swing.JLabel();
+        botaoEspelharHorizontal = new javax.swing.JButton();
+        botaoEspelharVertical = new javax.swing.JButton();
+        anguloRotacao = new javax.swing.JSlider();
+        labelRotacao = new javax.swing.JLabel();
+        escala = new javax.swing.JSlider();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        offsetX = new javax.swing.JSpinner();
+        offsetY = new javax.swing.JSpinner();
+        labelOffSetX = new javax.swing.JLabel();
+        labelOffSetY = new javax.swing.JLabel();
+        barraMenu = new javax.swing.JMenuBar();
+        menuArquivo = new javax.swing.JMenu();
+        arquivoAbrir = new javax.swing.JMenuItem();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ConverIMG");
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(java.awt.Color.white);
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelImgOriginal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jButton2.setText("Converter");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoConverter.setText("Converter");
+        botaoConverter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoConverterActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Imagem original");
+        txtImagemOriginal.setText("Imagem original");
 
-        jLabel4.setText("Imagem editada");
+        txtImagemEditada.setText("Imagem editada");
 
-        jLabel6.setText("Mediana: ");
+        labelMediana.setText("Mediana: ");
 
-        jLabel5.setText("Média da metade superior: ");
+        labeMedSuperior.setText("Média da metade superior: ");
 
-        jLabel7.setText("Moda da metade inferior: ");
+        labelMedInferior.setText("Moda da metade inferior: ");
 
-        jMenu1.setText("Arquivo");
+        labelImgEditada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        labelVariancia.setText("Variância: ");
+
+        botaoEspelharHorizontal.setText("Espelhar Horizontalmente");
+        botaoEspelharHorizontal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                botaoEspelharHorizontalActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Funções");
-
-        jMenuItem2.setText("Moda");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        botaoEspelharVertical.setText("Espelhar Verticalmente");
+        botaoEspelharVertical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                botaoEspelharVerticalActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setText("Média");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+        anguloRotacao.setMaximum(360);
+        anguloRotacao.setValue(0);
+        anguloRotacao.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                anguloRotacaoStateChanged(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Histograma");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+        labelRotacao.setText("Rotacionar");
+
+        escala.setMaximum(200);
+        escala.setValue(100);
+        escala.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                escalaStateChanged(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setText("Mediana");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+        jLabel2.setText("Escala");
+
+        offsetX.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                offsetXStateChanged(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu2);
+        offsetY.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                offsetYStateChanged(evt);
+            }
+        });
 
-        setJMenuBar(jMenuBar1);
+        labelOffSetX.setText("Offset X");
+
+        labelOffSetY.setText("Offset Y");
+
+        menuArquivo.setText("Arquivo");
+
+        arquivoAbrir.setText("Abrir");
+        arquivoAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                arquivoAbrirActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(arquivoAbrir);
+
+        barraMenu.add(menuArquivo);
+
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,79 +142,153 @@ public class NewJFrameImg extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtImagemOriginal)
+                    .addComponent(labelImgOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botaoConverter, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelMediana)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelVariancia))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botaoEspelharHorizontal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelRotacao))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botaoEspelharVertical, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(anguloRotacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(escala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel7)
-                        .addGap(318, 318, 318))))
+                        .addGap(26, 26, 26)
+                        .addComponent(txtImagemEditada))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelMedInferior)
+                                .addGap(110, 110, 110)
+                                .addComponent(labeMedSuperior))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelOffSetX)
+                                    .addComponent(labelOffSetY))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(offsetX, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(offsetY)))
+                            .addComponent(labelImgEditada, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(txtImagemOriginal)
+                    .addComponent(txtImagemEditada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelImgOriginal, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(labelImgEditada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelVariancia)
+                    .addComponent(labelMedInferior)
+                    .addComponent(labelMediana)
+                    .addComponent(labeMedSuperior)
+                    .addComponent(botaoConverter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7)))
-                .addContainerGap(371, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(botaoEspelharHorizontal)
+                                .addComponent(labelRotacao))
+                            .addComponent(anguloRotacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(botaoEspelharVertical)
+                                .addComponent(jLabel2))
+                            .addComponent(escala, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(offsetX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelOffSetX))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(offsetY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelOffSetY))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleDescription("");
+        labelImgOriginal.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    BufferedImage ib = null;
-    BufferedImage img = null;
-    GrayScale gs = new GrayScale();
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        img = gs.convert(ib);
-        jLabel2.setIcon(new ImageIcon(img));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    BufferedImage imagem_original = null;
+    BufferedImage imagem_editada = null;
+    
+    GrayScale escala_cinza = new GrayScale();
+    TransformacaoGeometrica transfoma = new TransformacaoGeometrica();
+    private void botaoConverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConverterActionPerformed
+        imagem_editada = escala_cinza.convert(imagem_original);
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+        calculos();
+    }//GEN-LAST:event_botaoConverterActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ib = gs.loadImg();
-        jLabel1.setIcon(new ImageIcon(ib));
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void arquivoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoAbrirActionPerformed
+        imagem_original = escala_cinza.loadImg();
+        //Copia a imagem
+        imagem_editada = escala_cinza.copiaImagem(imagem_original);
+        //Sets dos labels com escalas
+        labelImgOriginal.setIcon(new ImageIcon(imagem_original.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_arquivoAbrirActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        gs.criaGraficoHistograma();
-        jLabel1.setIcon(new ImageIcon(ib));
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void botaoEspelharHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEspelharHorizontalActionPerformed
+        imagem_editada = transfoma.espelha_horizontal(imagem_original);
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_botaoEspelharHorizontalActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        jLabel6.setText("Mediana: " + Integer.toString(gs.getMediana()));
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void botaoEspelharVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEspelharVerticalActionPerformed
+        imagem_editada = transfoma.espelha_vertical(imagem_original);
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_botaoEspelharVerticalActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        jLabel7.setText("Moda da metade inferior: " + Integer.toString(gs.getModa()));
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void anguloRotacaoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_anguloRotacaoStateChanged
+        imagem_editada = transfoma.rotaciona_imagem(imagem_original, anguloRotacao.getValue());
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_anguloRotacaoStateChanged
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        jLabel5.setText("Média da metade superior: " + Double.toString(gs.getMedia()));
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void escalaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_escalaStateChanged
+        imagem_editada = transfoma.redimensiona_imagem(imagem_original, escala.getValue());
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_escalaStateChanged
 
+    private void offsetXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_offsetXStateChanged
+        imagem_editada = transfoma.move_imagem(imagem_original, (int) offsetX.getValue(), (int) offsetY.getValue());
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_offsetXStateChanged
+
+    private void offsetYStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_offsetYStateChanged
+        imagem_editada = transfoma.move_imagem(imagem_original, (int) offsetX.getValue(), (int) offsetY.getValue());
+        labelImgEditada.setIcon(new ImageIcon(imagem_editada.getScaledInstance(550, 394, Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_offsetYStateChanged
+    private void calculos(){
+        //Cálculos
+        labelMedInferior.setText("Moda da metade inferior: " + Integer.toString(escala_cinza.getModa()));
+        labeMedSuperior.setText("Média da metade superior: " + Double.toString(escala_cinza.getMedia()));
+        escala_cinza.criaGraficoHistograma();
+        labelMediana.setText("Mediana: " + Integer.toString(escala_cinza.getMediana()));
+        labelVariancia.setText("Variância: " + Integer.toString(escala_cinza.getVariancia()));
+    }
     /**
      * @param args the command line arguments
      */
@@ -223,21 +325,28 @@ public class NewJFrameImg extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSlider anguloRotacao;
+    private javax.swing.JMenuItem arquivoAbrir;
+    private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JButton botaoConverter;
+    private javax.swing.JButton botaoEspelharHorizontal;
+    private javax.swing.JButton botaoEspelharVertical;
+    private javax.swing.JSlider escala;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JLabel labeMedSuperior;
+    private javax.swing.JLabel labelImgEditada;
+    private javax.swing.JLabel labelImgOriginal;
+    private javax.swing.JLabel labelMedInferior;
+    private javax.swing.JLabel labelMediana;
+    private javax.swing.JLabel labelOffSetX;
+    private javax.swing.JLabel labelOffSetY;
+    private javax.swing.JLabel labelRotacao;
+    private javax.swing.JLabel labelVariancia;
+    private javax.swing.JMenu menuArquivo;
+    private javax.swing.JSpinner offsetX;
+    private javax.swing.JSpinner offsetY;
+    private javax.swing.JLabel txtImagemEditada;
+    private javax.swing.JLabel txtImagemOriginal;
     // End of variables declaration//GEN-END:variables
 }
